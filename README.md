@@ -10,7 +10,7 @@ Node version selected at Vercel Cloud: 20
 
 ## Demo
 
-https://django-vercel-hello-world-pso.vercel.app/
+https://django-starter-one.vercel.app/
 
 ## Demo / Admin
 
