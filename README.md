@@ -110,7 +110,7 @@ python manage.py runserver
 ```
 Your Django application is now available at `http://127.0.0.1:8000/`.
 
-## Static files for the Admin Backend and the Frontend
+## Static files for the Frontend
 
 There is only one Django App in the Project and the dir 'static' and 'assets' can be created at root level
 
