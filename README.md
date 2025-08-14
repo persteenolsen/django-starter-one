@@ -156,13 +156,13 @@ The CSS files can be tested the same way like the .jpg above
 
 Now you can use the images and CSS in your Templates
 
-## Running Locally and take a look at the Admin Backend
+## Running Locally and take a look at the Website
 
 ```bash
 python manage.py runserver
 ```
 
-The Django application is now available at `http://127.0.0.1:8000/admin`
+The Django application is now available at `http://127.0.0.1:8000`
 
 ## Deployment to Vercel
 
