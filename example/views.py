@@ -1,17 +1,16 @@
-# example/views.py
+from django.http import HttpResponse
 from datetime import datetime
 
-from django.http import HttpResponse
+from django.template import loader
 
 def index(request):
-    now = datetime.now()
-    html = f'''
-    <html>
-        <body>
-            <h1>Hello from Python and Django hosted at Vercel</h1>
-            <p>The current time is { now }.</p>
-            <p>Note: The Administration part of this Demo is NOT configurated for this Starter</p>
-        </body>
-    </html>
-    '''
-    return HttpResponse(html)
+  template = loader.get_template('index.html')
+  return HttpResponse(template.render())
+
+def about(request):
+  template = loader.get_template('about.html')
+  return HttpResponse(template.render())
+
+def me(request):
+  template = loader.get_template('me.html')
+  return HttpResponse(template.render())

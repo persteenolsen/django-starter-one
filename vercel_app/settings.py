@@ -15,7 +15,6 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
@@ -23,10 +22,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-=cldztbc4jg&xl0!x673!*v2_=p$$eu)=7*f#d0#zs$44xx-h^'
 
 # SECURITY WARNING: don't run with debug turned on in production!
+# DEBUG = True
+
+# With DEBUG=False 404 errors will be directed to a default 404 template
+# Not: Django will display a 404.html if you have created one :-)
 DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1', '.vercel.app']
-
 
 # Application definition
 
@@ -36,11 +38,18 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+
+    # For serving static files
     'django.contrib.staticfiles',
     'example'
 ]
 
 MIDDLEWARE = [
+    
+     # For serving all kind of static files in a correct way use Debug = False
+     # This setting is neeeded for serving static files frontend and backend admin
+     "whitenoise.middleware.WhiteNoiseMiddleware",
+
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -55,7 +64,12 @@ ROOT_URLCONF = 'vercel_app.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+         
+         # Added the URL for work with templates
+         # Initially create the dir 'templates' at root level
+         # Root level is fine because there is only one Django App in the Project
+         # 'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -76,8 +90,17 @@ WSGI_APPLICATION = 'vercel_app.wsgi.app'
 # Note: Django modules for using databases are not support in serverless
 # environments like Vercel. You can use a database over HTTP, hosted elsewhere.
 
-DATABASES = {}
+#DATABASES = {
 
+#'default': {
+#    'ENGINE': 'django.db.backends.sqlite3',
+#    'NAME': BASE_DIR / "db.sqlite3",
+#  }
+
+#}
+
+# No Database needed for this Starter
+DATABASES = { }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -113,7 +136,28 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
+# Settings for serving all kind of static files for Backend Admin and Frontend:
+# Debug = False
+# There are only one Django App in the Project and the dir 'static' and 'assets' are at root level
+# Note: Initially create the dir 'static' with your static files a run the command:
+# "python manage.py collectstatic" and make a commit to GitHub for be ready for Dev + Prod
+# Where Django looks for static files
 STATIC_URL = 'static/'
+
+# Where you put your static files ( The dir static needs to match the above static )
+STATIC_ROOT = BASE_DIR/'static' 
+
+# Additional directory from which to load static files if wanted
+# Note: Create a root level dir 'assets' locally with your additional static files and run: 
+# "python manage.py collectstatic"
+# Now the static files in the 'assets' dir are copied to the 'static' directory  
+# Commit to GitHub for this to work in production ( At Vercel )
+STATICFILES_DIRS = [
+   
+   # Extra dir put your files 
+   BASE_DIR/'assets' 
+]
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
