@@ -4,7 +4,7 @@
 
 This example shows how to use Django 4 on Vercel with Serverless Functions using the [Python Runtime](https://vercel.com/docs/concepts/functions/serverless-functions/runtimes/python).
 
-Last updated: 14-08-2025
+Last updated: 30-08-2025
 
 Node version selected at Vercel Cloud: 20
 
@@ -21,6 +21,23 @@ https://django-starter-one.vercel.app/
 - Create the virtual envirement ".venv" for the Django Web App by Powershell or by VS Code
 - Virtual Enviroment by VS Code: "View - Command Palette - Python Create Enviroment"
 
+## Install by Python commands in Powershell at Windows 10
+
+- python -m venv .venv
+
+- cd .venv
+
+- Scripts/activate
+
+- Copy requirements.txt to .venv 
+
+- (.venv) pip install -r requirements.txt
+
+- (.venv) pip freeze > requirements.txt
+
+- cd ../
+
+- python manage.py runserver
 
 There is no Administration Backend abd no Database for this Starter serving Statis files
 
