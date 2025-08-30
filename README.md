@@ -39,7 +39,7 @@ https://django-starter-one.vercel.app/
 
 - python manage.py runserver
 
-There is no Administration Backend abd no Database for this Starter serving Statis files
+There is no Administration Backend and no Database for this Starter serving Statis files
 
 ## How it Works
 
